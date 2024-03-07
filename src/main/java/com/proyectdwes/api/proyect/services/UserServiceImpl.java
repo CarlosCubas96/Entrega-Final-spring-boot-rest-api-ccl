@@ -1,35 +1,52 @@
+// UserServiceImpl.java
 package com.proyectdwes.api.proyect.services;
-
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.proyectdwes.api.proyect.models.User;
 import com.proyectdwes.api.proyect.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserServiceImpl {
-	
+public class UserServiceImpl implements UserServiceI {
+
 	@Autowired
 	private UserRepository userRepository;
 
-	public User registerUser(User newUser) {
-		
-		// Validar que el correo electrónico no esté registrado previamente
-		if (userRepository.findByEmail(newUser.getEmail()).isPresent()) {
-			throw new IllegalArgumentException("El correo electrónico ya está registrado");
-		}
-
-		// Implementar lógica de validación adicional si es necesario
-
-		// Guardar el nuevo usuario en la base de datos
-		return userRepository.save(newUser);
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 
-	public Optional<User> loginUser(String email, String password) {
-		
-		// Validar las credenciales del usuario
-		return userRepository.findByEmail(email).filter(user -> user.getPassword().equals(password));
+	@Override
+	public User getUserById(Long userId) {
+		return userRepository.findById(userId).orElse(null);
+	}
+
+	@Override
+	public User createUser(User user) {
+		return userRepository.save(user);
+	}
+
+	@Override
+	public User updateUser(Long userId, User updatedUser) {
+		Optional<User> existingUser = userRepository.findById(userId);
+		if (existingUser.isPresent()) {
+			User userToUpdate = existingUser.get();
+			// Actualiza los campos relevantes
+			userToUpdate.setName(updatedUser.getName());
+			userToUpdate.setEmail(updatedUser.getEmail());
+			userToUpdate.setPassword(updatedUser.getPassword());
+			return userRepository.save(userToUpdate);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void deleteUser(Long userId) {
+		userRepository.deleteById(userId);
 	}
 }

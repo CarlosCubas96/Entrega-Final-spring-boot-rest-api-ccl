@@ -1,10 +1,9 @@
 package com.proyectdwes.api.proyect.models;
 
-import org.springframework.data.annotation.Id;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Bicycle {
@@ -12,6 +11,7 @@ public class Bicycle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String model;
 	private double hourlyRate;
 	private boolean available;

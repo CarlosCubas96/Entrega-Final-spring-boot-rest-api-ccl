@@ -5,9 +5,15 @@ import java.util.List;
 import com.proyectdwes.api.proyect.models.Bicycle;
 
 public interface BicycleServiceI {
-	List<Bicycle> getAvailableBicycles();
 
-	Bicycle getBicycleDetails(Long bicycleId);
+	List<Bicycle> getAllBicycles();
 
-	List<Bicycle> filterBicycles(String location, String type, double maxPrice, boolean available);
+	Bicycle getBicycleById(Long bicycleId);
+
+	Bicycle createBicycle(Bicycle bicycle);
+
+	Bicycle updateBicycle(Long bicycleId, Bicycle updatedBicycle);
+
+	void deleteBicycle(Long bicycleId);
+
 }
