@@ -2,6 +2,10 @@
 
 Este proyecto consiste en una API para gestionar el alquiler de bicicletas. Permite a los usuarios registrados alquilar y devolver bicicletas, así como consultar su historial de alquileres. Además, proporciona endpoints para administrar la información de las bicicletas y los usuarios.
 
+## Documentación de la API
+
+Puedes encontrar la documentación detallada de la API en [Postman](https://documenter.getpostman.com/view/32324410/2sA2xiWXfg).
+
 ## Tecnologías Utilizadas
 
 - Spring Boot: Marco de desarrollo de Java para crear aplicaciones basadas en Spring.
