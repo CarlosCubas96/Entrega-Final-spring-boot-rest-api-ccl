@@ -3,7 +3,6 @@ package com.proyectdwes.api.proyect.services;
 
 import com.proyectdwes.api.proyect.models.Bicycle;
 import com.proyectdwes.api.proyect.repository.BicycleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,8 +11,11 @@ import java.util.Optional;
 @Service
 public class BicycleServiceImpl implements BicycleServiceI {
 
-	@Autowired
 	private BicycleRepository bicycleRepository;
+
+	public BicycleServiceImpl(BicycleRepository bicycleRepository) {
+		this.bicycleRepository = bicycleRepository;
+	}
 
 	@Override
 	public List<Bicycle> getAllBicycles() {

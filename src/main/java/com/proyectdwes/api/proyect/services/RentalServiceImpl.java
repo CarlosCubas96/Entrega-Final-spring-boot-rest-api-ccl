@@ -6,7 +6,6 @@ import com.proyectdwes.api.proyect.models.Rental;
 import com.proyectdwes.api.proyect.models.User;
 import com.proyectdwes.api.proyect.repository.BicycleRepository;
 import com.proyectdwes.api.proyect.repository.RentalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -17,14 +16,16 @@ import java.util.Optional;
 @Service
 public class RentalServiceImpl implements RentalServiceI {
 
-	@Autowired
 	private RentalRepository rentalRepository;
-
-	@Autowired
 	private BicycleRepository bicycleRepository;
-
-	@Autowired
 	private BicycleServiceI bicycleService;
+
+	public RentalServiceImpl(RentalRepository rentalRepository, BicycleRepository bicycleRepository,
+			BicycleServiceI bicycleService) {
+		this.rentalRepository = rentalRepository;
+		this.bicycleRepository = bicycleRepository;
+		this.bicycleService = bicycleService;
+	}
 
 	@Override
 	public Rental createRental(Long userId, Long bicycleId, LocalDateTime startTime, LocalDateTime endTime) {
